@@ -11,12 +11,14 @@ public class PlayerControllerA : MonoBehaviour
     Vector3 offsetA = new Vector3(-0.6f,0,0);
     //現在のAチームマスの位置
     int currentIndexA = 0;
+    bool isMovingA = false;
 
     void Start()
     {
         Application.targetFrameRate = 60;
         //初期値の設定
         transform.position =this.masu[0].position + offsetA;
+        isMovingA = true;
 
     }
     void Update()
@@ -45,10 +47,13 @@ public class PlayerControllerA : MonoBehaviour
                 yield break;
             }
 
-            // 次のマスへ移動
-            Vector3 target = masu[currentIndexA].position + offsetA;
-            //移動し終わるまで待機
-            yield return StartCoroutine(MoveTo(target));
+            if (isMovingA == true)
+            {
+                // 次のマスへ移動
+                Vector3 target = masu[currentIndexA].position + offsetA;
+                //移動し終わるまで待機
+                yield return StartCoroutine(MoveTo(target));
+            }
         }
     }
 
@@ -58,8 +63,9 @@ public class PlayerControllerA : MonoBehaviour
         {
             //移動する速さの設定
             transform.position = Vector3.MoveTowards(transform.position,target,5f * Time.deltaTime);
-
+            isMovingA = false;
             yield return null;
+            isMovingA = true;
         }
     }
 }

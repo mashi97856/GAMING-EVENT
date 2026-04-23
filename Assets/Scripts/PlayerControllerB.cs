@@ -8,11 +8,13 @@ public class PlayerControllerB: MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Transform[] masu; // マス座標（Inspectorで設定）
     int currentIndexB = 0;//現在のBチームマスの位置
+    bool isMovingB = false;
 
     void Start()
     {
         Application.targetFrameRate = 60;
         transform.position =this.masu[0].position + offsetB;
+        isMovingB = true;
     }
     void Update()
     {
@@ -40,9 +42,12 @@ public class PlayerControllerB: MonoBehaviour
                 yield break;
             }
 
-            // 次のマスへ移動
-            Vector3 target = masu[currentIndexB].position + offsetB;
-            yield return StartCoroutine(MoveTo(target));
+            if (isMovingB == true)
+            {
+                // 次のマスへ移動
+                Vector3 target = masu[currentIndexB].position + offsetB;
+                yield return StartCoroutine(MoveTo(target));
+            }
         }
     }
 
@@ -51,8 +56,9 @@ public class PlayerControllerB: MonoBehaviour
         while (Vector3.Distance(transform.position, target) > 0.05f)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, 5f * Time.deltaTime);
-
+            isMovingB = false;
             yield return null;
+            isMovingB = true;
         }
     }
 }
