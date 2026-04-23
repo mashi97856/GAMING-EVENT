@@ -442,8 +442,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1375932774}
   - component: {fileID: 1375932773}
+  - component: {fileID: 1375932775}
   m_Layer: 0
-  m_Name: 8-fotor-bg-remover-20260423175149_0
+  m_Name: Dice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -523,6 +524,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1375932775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375932772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68043883bc0afd449b6a50a128c3b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaikoroController
+  saikoroSprites:
+  - {fileID: -3376776231380396483, guid: 5bd9c9abd9a415643bfe72aa348685cd, type: 3}
+  - {fileID: -1407075780586281409, guid: 88b253ed5f778664fb5836596f686403, type: 3}
+  - {fileID: -8744017227158962919, guid: 4b4418e816b4ccf4ab0e21fa6e04f133, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
