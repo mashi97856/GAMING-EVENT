@@ -1,13 +1,16 @@
+using Unity.Multiplayer.PlayMode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SaikoroController : MonoBehaviour
+public class SaikoroControllerA : MonoBehaviour
 {
     public Sprite[] saikoroSprites; // サイコロの面のスプライト（Inspectorで設定）
     float time = 0;
     int idx = 0;
     bool isRolling = true; // サイコロが回転中かどうか
+    int currentPlayer = 0; // 0=プレイヤーA、1=プレイヤーB
+    public GameObject[] players;
     SpriteRenderer spriteRenderer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,18 +22,27 @@ public class SaikoroController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // スペースキーで停止
+        // スペースキーで停止＆処理まとめる
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             if (isRolling)
             {
                 isRolling = false;
 
-                // ランダムで最終結果
+                // 出目（0〜3）
                 int result = Random.Range(0, saikoroSprites.Length);
+
+                // 見た目更新
                 spriteRenderer.sprite = saikoroSprites[result];
 
                 Debug.Log("出目: " + (result + 1));
+
+                // プレイヤー移動（+1して1〜3に）
+                GameObject nowPlayer = players[currentPlayer];
+                nowPlayer.GetComponent<PlayerController>().Move(result + 1);
+
+                // ターン交代
+                currentPlayer = (currentPlayer + 1) % players.Length;
             }
         }
 

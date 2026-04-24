@@ -13,6 +13,11 @@ public class PlayerControllerA : MonoBehaviour
     int currentIndexA = 0;
     bool isMovingA = false;
 
+    public void Move(int step)
+    {
+        StartCoroutine(MoveStep(step));
+    }
+
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -40,7 +45,7 @@ public class PlayerControllerA : MonoBehaviour
             if (currentIndexA >= masu.Length)
             {
                 currentIndexA = masu.Length-1;
-                if(this.transform.position == masu[21].position + offsetA)
+                if (currentIndexA >= masu.Length - 1)
                 {
                     Debug.Log("ゴール！");
                 }
