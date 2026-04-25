@@ -5,27 +5,24 @@ public class PlayerController : MonoBehaviour
 {
     public Transform[] masu;
     public Vector3 offset;
-
-    int currentIndex = 0;
+    public bool isMoving = false;
+    public int currentIndex = 0;
 
     void Start()
     {
-        if (masu.Length == 0)
-        {
-            Debug.LogError("masuが設定されてない！");
-            return;
-        }
-
         transform.position = masu[0].position + offset;
     }
 
     public void Move(int step)
     {
+        if (isMoving) return; // 動いてたら無視
+
         StartCoroutine(MoveStep(step));
     }
 
     IEnumerator MoveStep(int step)
     {
+        isMoving = true;
         for (int i = 0; i < step; i++)
         {
             currentIndex++;

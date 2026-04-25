@@ -6,13 +6,13 @@ using UnityEngine.InputSystem;
 public class SaikoroControllerA : MonoBehaviour
 {
     public Sprite[] saikoroSprites; // サイコロの面のスプライト（Inspectorで設定）
-    float time = 0;
-    int idx = 0;
-    bool isRolling = true; // サイコロが回転中かどうか
-    int currentPlayer = 0; // 0=プレイヤーA、1=プレイヤーB
+    public float time = 0;// サイコロの回転時間を管理
+    public int idx = 0; // サイコロの面の数字の管理 
+    public bool isRolling = true; // サイコロが回転中かどうか
+    public int currentPlayer = 0; // 0=プレイヤーA、1=プレイヤーB
     public GameObject[] players;
     SpriteRenderer spriteRenderer;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         Application.targetFrameRate = 60;
