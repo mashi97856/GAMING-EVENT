@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
     IEnumerator MoveTo(Vector3 target)
-    { 
+    {
 
         int safety = 0; // 無限防止
 
