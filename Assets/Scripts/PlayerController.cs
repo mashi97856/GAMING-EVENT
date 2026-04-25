@@ -19,10 +19,10 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(MoveStep(step));
     }
-
     IEnumerator MoveStep(int step)
     {
         isMoving = true;
+
         for (int i = 0; i < step; i++)
         {
             currentIndex++;
@@ -31,24 +31,40 @@ public class PlayerController : MonoBehaviour
             {
                 currentIndex = masu.Length - 1;
                 Debug.Log(gameObject.name + " ゴール！");
-                yield break;
+                break; // ←ここが重要（yield breakじゃない）
             }
 
             Vector3 target = masu[currentIndex].position + offset;
             yield return StartCoroutine(MoveTo(target));
         }
-    }
 
+        // ★これ絶対必要
+        isMoving = false;
+    }
     IEnumerator MoveTo(Vector3 target)
-    {
-        while (Vector3.Distance(transform.position, target) > 0.05f)
+    { 
+
+        int safety = 0; // 無限防止
+
+        while (Vector3.Distance(transform.position, target) > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(
+
+            transform.position = Vector3.MoveTowards
+                (
                 transform.position,
                 target,
                 5f * Time.deltaTime
-            );
+                 );
+
+            safety++;
+            if (safety > 300) // 5秒くらいで強制終了
+            {
+                break;
+            }
+
             yield return null;
         }
+
+        transform.position = target;
     }
 }

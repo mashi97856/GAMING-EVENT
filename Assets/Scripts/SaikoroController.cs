@@ -2,51 +2,36 @@ using Unity.Multiplayer.PlayMode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class SaikoroControllerA : MonoBehaviour
 {
     public Sprite[] saikoroSprites; // サイコロの面のスプライト（Inspectorで設定）
     public float time = 0;// サイコロの回転時間を管理
     public int idx = 0; // サイコロの面の数字の管理 
-    public bool isRolling = true; // サイコロが回転中かどうか
+    public bool isRolling = false; // サイコロが回転中かどうか
     public int currentPlayer = 0; // 0=プレイヤーA、1=プレイヤーB
-    public GameObject[] players;
-    SpriteRenderer spriteRenderer;
+    public GameObject[] players;// プレイヤーのゲームオブジェクト（Inspectorで設定）
+    SpriteRenderer spriteRenderer;// サイコロのスプライトを変更するためのコンポーネント
+    public bool canRoll = true;// サイコロを振れるかどうか
 
     void Start()
     {
+        Debug.Log("サイコロ開始");
         Application.targetFrameRate = 60;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();// サイコロのスプライトを変更するためのコンポーネントを取得
     }
 
     // Update is called once per frame
     void Update()
     {
-        // スペースキーで停止＆処理まとめる
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        // スペースで止めるだけ
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && canRoll && isRolling)
         {
-            if (isRolling)
-            {
-                isRolling = false;
-
-                // 出目（0〜3）
-                int result = Random.Range(0, saikoroSprites.Length);
-
-                // 見た目更新
-                spriteRenderer.sprite = saikoroSprites[result];
-
-                Debug.Log("出目: " + (result + 1));
-
-                // プレイヤー移動（+1して1〜3に）
-                GameObject nowPlayer = players[currentPlayer];
-                nowPlayer.GetComponent<PlayerController>().Move(result + 1);
-
-                // ターン交代
-                currentPlayer = (currentPlayer + 1) % players.Length;
-            }
+            StopDice();
         }
 
-        // 回転中だけアニメーション
+        // 回転アニメーション
         if (isRolling)
         {
             time += Time.deltaTime;
@@ -58,5 +43,51 @@ public class SaikoroControllerA : MonoBehaviour
                 idx = (idx + 1) % saikoroSprites.Length;
             }
         }
+    }
+    void StopDice()
+    {
+        isRolling = false;
+        canRoll = false;
+
+        int result = Random.Range(0, saikoroSprites.Length);
+        spriteRenderer.sprite = saikoroSprites[result];
+
+        GameObject nowPlayer = players[currentPlayer];
+        PlayerController pc = nowPlayer.GetComponent<PlayerController>();// プレイヤーのゲームオブジェクトからPlayerControllerを取得
+
+        pc.Move(result + 1);
+
+        StartCoroutine(WaitTurnEnd(pc));
+    }
+    IEnumerator RollAndStop(int milliseconds)
+    {
+        isRolling = true;
+
+        float seconds = milliseconds / 1000f;
+        yield return new WaitForSeconds(seconds);
+
+        isRolling = false;
+
+        int result = Random.Range(0, saikoroSprites.Length);
+        spriteRenderer.sprite = saikoroSprites[result];
+
+        GameObject nowPlayer = players[currentPlayer];
+        PlayerController pc = nowPlayer.GetComponent<PlayerController>();
+        if (pc != null)
+        {
+            pc.Move(result + 1);
+        }
+        StartCoroutine(WaitTurnEnd(pc));
+    }
+    IEnumerator WaitTurnEnd(PlayerController pc)
+    {
+        while (pc.isMoving)
+        {
+            yield return null;
+        }
+
+        currentPlayer = (currentPlayer + 1) % players.Length;
+        isRolling = true;
+        canRoll = true;
     }
 }
