@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
-public class SaikoroControllerA : MonoBehaviour
+public class SaikoroController : MonoBehaviour
 {
     public Sprite[] saikoroSprites; // サイコロの面のスプライト（Inspectorで設定）
     public float time = 0;// サイコロの回転時間を管理
-    public int idx = 0; // サイコロの面の数字の管理 
+    public int idx = 0; // サイコロの面の数字の管理
     public bool isRolling = false; // サイコロが回転中かどうか
     public int currentPlayer = 0; // 0=プレイヤーA、1=プレイヤーB
     public GameObject[] players;// プレイヤーのゲームオブジェクト（Inspectorで設定）
@@ -20,6 +20,7 @@ public class SaikoroControllerA : MonoBehaviour
         Debug.Log("サイコロ開始");
         Application.targetFrameRate = 60;
         spriteRenderer = GetComponent<SpriteRenderer>();// サイコロのスプライトを変更するためのコンポーネントを取得
+        isRolling = true; // サイコロを自動で回転開始
     }
 
     // Update is called once per frame
