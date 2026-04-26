@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
                 transform.position,
                 target,
                 5f * Time.deltaTime
-                 );
+                );
 
             safety++;
             if (safety > 300) // 5秒くらいで強制終了
