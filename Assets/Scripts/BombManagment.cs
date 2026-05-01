@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class BombManagment : MonoBehaviour
 {
     public Sprite[] bombSprites; // 爆弾のスプライト（Inspectorで設定）
+    public string gameOverSceneName = "BBPEventScene";
     private int bombIndex; // フィールドとして定義
     private SpriteRenderer spriteRenderer; // SpriteRendererをキャッシュ
 
@@ -24,42 +26,49 @@ public class BombManagment : MonoBehaviour
     void Update()
     {
         if (spriteRenderer == null) return;
+        if (Keyboard.current == null) return;
 
-        if(Keyboard.current.qKey.wasPressedThisFrame)
+        if (Keyboard.current.qKey.wasPressedThisFrame)
         {
-            if (bombIndex == 0) // 爆弾が選ばれた場合
-            {
-                Debug.Log("爆弾だ！ゲームオーバー！");
-                // ゲームオーバーの処理をここに追加
-            }
-            else
-            {
-                Debug.Log("三角の爆弾はセーフ！");
-            }
+            HandleBombSelection(0, "三角");
         }
-        if(Keyboard.current.wKey.wasPressedThisFrame)
+        if (Keyboard.current.wKey.wasPressedThisFrame)
         {
-            if (bombIndex == 1) // 爆弾が選ばれた場合
-            {
-                Debug.Log("爆弾だ！ゲームオーバー！");
-                // ゲームオーバーの処理をここに追加
-            }
-            else
-            {
-                Debug.Log("四角の爆弾はセーフ！");
-            }
+            HandleBombSelection(1, "四角");
         }
-        if(Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current.eKey.wasPressedThisFrame)
         {
-            if (bombIndex == 2) // 爆弾が選ばれた場合
-            {
-                Debug.Log("爆弾だ！ゲームオーバー！");
-                // ゲームオーバーの処理をここに追加
-            }
-            else
-            {
-                Debug.Log("×の爆弾はセーフ！");
-            }
+            HandleBombSelection(2, "×");
         }
+    }
+
+    private void HandleBombSelection(int selectedIndex, string shapeName)
+    {
+        if (bombIndex == selectedIndex)
+        {
+            Debug.Log($"{shapeName}の爆弾だ！ゲームオーバー！ シーンをロードします: {gameOverSceneName}");
+            LoadGameOverScene();
+        }
+        else
+        {
+            Debug.Log($"{shapeName}の爆弾はセーフ！");
+        }
+    }
+
+    private void LoadGameOverScene()
+    {
+        if (string.IsNullOrEmpty(gameOverSceneName))
+        {
+            Debug.LogError("ゲームオーバーシーン名が空です。");
+            return;
+        }
+
+        if (!Application.CanStreamedLevelBeLoaded(gameOverSceneName))
+        {
+            Debug.LogError($"シーン '{gameOverSceneName}' がビルド設定に追加されていません。Build Settings にシーンを追加してください。");
+            return;
+        }
+
+        SceneManager.LoadScene(gameOverSceneName);
     }
 }

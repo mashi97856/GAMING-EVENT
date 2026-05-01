@@ -1705,6 +1705,7 @@ MonoBehaviour:
   - {fileID: 923834884}
   offset: {x: -0.6, y: 0, z: 0}
   isMoving: 0
+  currentIndex: 0
 --- !u!212 &878065894
 SpriteRenderer:
   serializedVersion: 2
@@ -2514,9 +2515,14 @@ MonoBehaviour:
   - {fileID: -3376776231380396483, guid: 5bd9c9abd9a415643bfe72aa348685cd, type: 3}
   - {fileID: -1407075780586281409, guid: 88b253ed5f778664fb5836596f686403, type: 3}
   - {fileID: -8744017227158962919, guid: 4b4418e816b4ccf4ab0e21fa6e04f133, type: 3}
+  time: 0
+  idx: 0
+  isRolling: 0
+  currentPlayer: 0
   players:
   - {fileID: 1745933003}
   - {fileID: 878065891}
+  canRoll: 1
 --- !u!212 &1199416856
 SpriteRenderer:
   serializedVersion: 2
@@ -2585,7 +2591,7 @@ Transform:
   m_GameObject: {fileID: 1199416854}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.6, y: -4.6, z: -1}
+  m_LocalPosition: {x: 10.6, y: -4.6, z: -2}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3206,6 +3212,7 @@ MonoBehaviour:
   - {fileID: 923834884}
   offset: {x: 0.6, y: 0, z: 0}
   isMoving: 0
+  currentIndex: 0
 --- !u!212 &1745933005
 SpriteRenderer:
   serializedVersion: 2

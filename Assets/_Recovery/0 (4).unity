@@ -1197,7 +1197,6 @@ MonoBehaviour:
   - {fileID: -1540426309290004842, guid: 1b4b007a811e4704cbe93850244df8d2, type: 3}
   - {fileID: 8389134475083476877, guid: 190a277fb0aa1a34e9df9c1b71a53244, type: 3}
   - {fileID: -6270953770400647376, guid: e98b2956460c75e449edee2436f8e582, type: 3}
-  gameOverSceneName: BBPEvent
 --- !u!4 &2126464905
 Transform:
   m_ObjectHideFlags: 0
