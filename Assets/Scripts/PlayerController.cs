@@ -20,6 +20,17 @@ public class PlayerController : MonoBehaviour
         currentIndex = GameData.playerBIndex;
     }
 
+    // 爆弾が爆発した場合、2マス戻す
+    if (GameData.bombExploded && GameData.bombExplodedPlayer == (gameObject.name == "TeamA" ? 0 : 1))
+    {
+        Debug.Log($"{gameObject.name}: 爆発したので2マス戻ります。現在:{currentIndex} → ");
+        currentIndex = Mathf.Max(0, currentIndex - 2);
+        Debug.Log($"{currentIndex}");
+        GameData.bombExploded = false;
+        GameData.bombExplodedPlayer = -1;
+        SavePosition();
+    }
+
     transform.position = masu[currentIndex].position + offset;
     }
     public void Move(int step)

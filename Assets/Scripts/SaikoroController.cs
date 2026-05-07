@@ -21,8 +21,14 @@ public class SaikoroController : MonoBehaviour
         Debug.Log("サイコロ開始");
         Application.targetFrameRate = 60;
         spriteRenderer = GetComponent<SpriteRenderer>();// サイコロのスプライトを変更するためのコンポーネントを取得
-        isRolling = true; // サイコロを自動で回転開始
         currentPlayer = GameData.currentPlayer;
+        if (GameData.bombGameFinished)
+        {
+            currentPlayer = (currentPlayer + 1) % players.Length;
+            GameData.currentPlayer = currentPlayer;
+            GameData.bombGameFinished = false;
+        }
+        isRolling = true; // サイコロを自動で回転開始
     }
 
     // Update is called once per frame

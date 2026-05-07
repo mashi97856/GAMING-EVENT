@@ -46,29 +46,18 @@ public class BombManagment : MonoBehaviour
     {
         if (bombIndex == selectedIndex)
         {
-            Debug.Log($"{shapeName}の爆弾だ！ゲームオーバー！ シーンをロードします: {gameOverSceneName}");
-            LoadGameOverScene();
+            Debug.Log($"{shapeName}の爆弾だ！２マス下がります！");
+            // 爆発フラグを立てる
+            GameData.bombExploded = true;
+            GameData.bombExplodedPlayer = GameData.currentPlayer; // 爆発したプレイヤーを記録
+            GameData.bombGameFinished = true;
+            SceneManager.LoadScene("BBPEvent");
         }
         else
         {
             Debug.Log($"{shapeName}の爆弾はセーフ！");
+            GameData.bombGameFinished = true;
+            SceneManager.LoadScene("BBPEvent");
         }
-    }
-
-    private void LoadGameOverScene()
-    {
-        if (string.IsNullOrEmpty(gameOverSceneName))
-        {
-            Debug.LogError("ゲームオーバーシーン名が空です。");
-            return;
-        }
-
-        if (!Application.CanStreamedLevelBeLoaded(gameOverSceneName))
-        {
-            Debug.LogError($"シーン '{gameOverSceneName}' がビルド設定に追加されていません。Build Settings にシーンを追加してください。");
-            return;
-        }
-
-        SceneManager.LoadScene(gameOverSceneName);
     }
 }
