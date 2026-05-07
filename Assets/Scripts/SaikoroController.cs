@@ -22,6 +22,7 @@ public class SaikoroController : MonoBehaviour
         Application.targetFrameRate = 60;
         spriteRenderer = GetComponent<SpriteRenderer>();// サイコロのスプライトを変更するためのコンポーネントを取得
         isRolling = true; // サイコロを自動で回転開始
+        currentPlayer = GameData.currentPlayer;
     }
 
     // Update is called once per frame
@@ -61,26 +62,6 @@ public class SaikoroController : MonoBehaviour
 
         StartCoroutine(WaitTurnEnd(pc));
     }
-    IEnumerator RollAndStop(int milliseconds)
-    {
-        isRolling = true;
-
-        float seconds = milliseconds / 1000f;
-        yield return new WaitForSeconds(seconds);
-
-        isRolling = false;
-
-        int result = Random.Range(0, saikoroSprites.Length);
-        spriteRenderer.sprite = saikoroSprites[result];
-
-        GameObject nowPlayer = players[currentPlayer];
-        PlayerController pc = nowPlayer.GetComponent<PlayerController>();
-        if (pc != null)
-        {
-            pc.Move(result + 1);
-        }
-        StartCoroutine(WaitTurnEnd(pc));
-    }
     IEnumerator WaitTurnEnd(PlayerController pc)
     {
         while (pc.isMoving)
@@ -89,6 +70,7 @@ public class SaikoroController : MonoBehaviour
         }
 
         currentPlayer = (currentPlayer + 1) % players.Length;
+        GameData.currentPlayer = currentPlayer;
         isRolling = true;
         canRoll = true;
     }

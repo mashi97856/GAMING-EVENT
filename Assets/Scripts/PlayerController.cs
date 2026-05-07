@@ -1,46 +1,84 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform[] masu;
-    public Vector3 offset;
-    public bool isMoving = false;
-    public int currentIndex = 0;
+    public Transform[] masu;// 空マスの位置（Inspectorで設定）
+    public Vector3 offset;// プレイヤーの位置のオフセット（Inspectorで設定）
+    public bool isMoving = false;// プレイヤーが移動中かどうか
+    public int currentIndex = 0;// 現在のマスのインデックス
 
     void Start()
     {
-        transform.position = masu[0].position + offset;
+    if (gameObject.name == "TeamA")
+    {
+        currentIndex = GameData.playerAIndex;
+    }
+    else
+    {
+        currentIndex = GameData.playerBIndex;
     }
 
+    transform.position = masu[currentIndex].position + offset;
+    }
     public void Move(int step)
     {
         if (isMoving) return; // 動いてたら無視
 
         StartCoroutine(MoveStep(step));
     }
-    IEnumerator MoveStep(int step)
+
+IEnumerator MoveStep(int step)
+{
+    isMoving = true;
+
+    for (int i = 0; i < step; i++)
     {
-        isMoving = true;
+        currentIndex++;
 
-        for (int i = 0; i < step; i++)
+        if (currentIndex >= masu.Length)
         {
-            currentIndex++;
+            currentIndex = masu.Length - 1;
 
-            if (currentIndex >= masu.Length)
-            {
-                currentIndex = masu.Length - 1;
-                Debug.Log(gameObject.name + " ゴール！");
-                break; // ←ここが重要（yield breakじゃない）
-            }
+            Debug.Log(gameObject.name + " ゴール！");
 
-            Vector3 target = masu[currentIndex].position + offset;
-            yield return StartCoroutine(MoveTo(target));
+            SceneManager.LoadScene("EndScene");
+            break;
         }
 
-        // ★これ絶対必要
-        isMoving = false;
+        Vector3 target = masu[currentIndex].position + offset;
+
+        yield return StartCoroutine(MoveTo(target));
+
+        // ★止まった瞬間だけ判定
+        if (currentIndex == 4 ||
+            currentIndex == 10 ||
+            currentIndex == 15)
+        {
+            SavePosition();
+
+            SceneManager.LoadScene("爆弾解除ゲーム");
+
+            yield break;
+        }
     }
+
+    isMoving = false;
+
+    SavePosition();
+}
+void SavePosition()
+{
+    if (gameObject.name == "TeamA")
+    {
+        GameData.playerAIndex = currentIndex;
+    }
+    else
+    {
+        GameData.playerBIndex = currentIndex;
+    }
+}
     IEnumerator MoveTo(Vector3 target)
     {
 
