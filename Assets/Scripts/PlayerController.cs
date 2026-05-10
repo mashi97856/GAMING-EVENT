@@ -86,9 +86,7 @@ IEnumerator MoveBack(int steps)
             currentIndex == 15)
         {
             SavePosition();
-
             SceneManager.LoadScene("爆弾解除ゲーム");
-
             yield break;
         }
     }
