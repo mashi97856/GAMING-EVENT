@@ -51,13 +51,13 @@ public class BombManagment : MonoBehaviour
             GameData.bombExploded = true;
             GameData.bombExplodedPlayer = GameData.currentPlayer; // 爆発したプレイヤーを記録
             GameData.bombGameFinished = true;
-            SceneManager.LoadScene("BBPEvent");
+            SceneManager.LoadScene("爆弾解除失敗画面");
         }
         else
         {
             Debug.Log($"{shapeName}の爆弾はセーフ！");
             GameData.bombGameFinished = true;
-            SceneManager.LoadScene("BBPEvent");
+            SceneManager.LoadScene("爆弾解除成功画面");
         }
     }
 }
