@@ -59,42 +59,52 @@ IEnumerator MoveBack(int steps)
     }
 
     IEnumerator MoveStep(int step)
-{
-    isMoving = true;
-
-    for (int i = 0; i < step; i++)
     {
-        currentIndex++;
+        isMoving = true;
 
-        if (currentIndex >= masu.Length-1)
+        for (int i = 0; i < step; i++)
         {
-            currentIndex = masu.Length - 1;
+            currentIndex++;
 
-            Debug.Log(gameObject.name + " ゴール！");
+            if (currentIndex >= masu.Length - 1)
+            {
+                currentIndex = masu.Length - 1;
 
-            SceneManager.LoadScene("EndScene");
-            break;
+                Debug.Log(gameObject.name + " ゴール！");
+                SavePosition();
+                SceneManager.LoadScene("EndScene");
+                yield break;
+            }
+
+            Vector3 target = masu[currentIndex].position + offset;
+            yield return StartCoroutine(MoveTo(target));
+
+            // ★止まった瞬間だけ判定
+            if (currentIndex == 4 ||
+                currentIndex == 10 ||
+                currentIndex == 15)
+            {
+                SavePosition();
+                SceneManager.LoadScene("爆弾解除ゲームのルール説明画面");
+                yield break;
+            }
         }
 
-        Vector3 target = masu[currentIndex].position + offset;
-
-        yield return StartCoroutine(MoveTo(target));
-
-        // ★止まった瞬間だけ判定
-        if (currentIndex == 4 ||
-            currentIndex == 10 ||
-            currentIndex == 15)
+        if (currentIndex == 3 || currentIndex == 9 || currentIndex == 13 || currentIndex == 17)
         {
-            SavePosition();
-            SceneManager.LoadScene("爆弾解除ゲームのルール説明画面");
-            yield break;
+            currentIndex--;
+            if (currentIndex < 0)
+            {
+                currentIndex = 0;
+            }
+
+            Vector3 backTarget = masu[currentIndex].position + offset;
+            yield return StartCoroutine(MoveTo(backTarget));
         }
+
+        isMoving = false;
+        SavePosition();
     }
-
-    isMoving = false;
-
-    SavePosition();
-}
 void SavePosition()
 {
     if (gameObject.name == "TeamA")
