@@ -80,12 +80,16 @@ IEnumerator MoveBack(int steps)
             yield return StartCoroutine(MoveTo(target));
 
             // ★止まった瞬間だけ判定
-            if (currentIndex == 4 ||
-                currentIndex == 10 ||
-                currentIndex == 15)
+            if (currentIndex == 4 )
             {
                 SavePosition();
                 SceneManager.LoadScene("爆弾解除ゲームのルール説明画面");
+                yield break;
+            }
+            if(currentIndex == 10||currentIndex == 15)
+            {
+                SavePosition();
+                SceneManager.LoadScene("爆弾解除ゲーム");
                 yield break;
             }
         }
