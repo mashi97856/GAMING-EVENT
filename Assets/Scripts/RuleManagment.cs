@@ -11,7 +11,7 @@ public class RuleManagment : MonoBehaviour
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            SceneManager.LoadScene("BBPEvent");
+            SceneManager.LoadScene("爆弾解除ゲーム");
         }
     }
 }
