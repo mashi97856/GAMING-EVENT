@@ -83,7 +83,7 @@ IEnumerator MoveBack(int steps)
             if (currentIndex == 4 )
             {
                 SavePosition();
-                SceneManager.LoadScene("爆弾解除ゲームのルール説明画面");
+                SceneManager.LoadScene("爆弾解除ゲームのルール説明画面1");
                 yield break;
             }
             if(currentIndex == 10||currentIndex == 15)
