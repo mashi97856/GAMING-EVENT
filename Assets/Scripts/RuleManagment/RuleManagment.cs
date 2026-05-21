@@ -9,7 +9,7 @@ public class RuleManagment : MonoBehaviour
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            SceneManager.LoadScene("爆弾解除ゲームのルール説明画面2");
+            SceneManager.LoadScene("爆弾解除ゲーム");
         }
     }
 }
