@@ -106,6 +106,12 @@ IEnumerator MoveBack(int steps)
             yield return StartCoroutine(MoveTo(backTarget));
         }
 
+        if (currentIndex == 20)
+        {
+            // 20マス目に止まったら2マス戻る（アニメーション付き）
+            yield return StartCoroutine(MoveBack(2));
+        }
+        
         isMoving = false;
         SavePosition();
     }
