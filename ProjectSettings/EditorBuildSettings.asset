@@ -56,6 +56,9 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/SceneManagement/\u30A2\u30A4\u30B9\u30D6\u30EC\u30FC\u30AD\u30F3\u30B0/Self-Introduction.unity"
     guid: 3111229e67de7904c976d300bdbe6538
+  - enabled: 1
+    path: "Assets/SceneManagement/\u30B2\u30FC\u30E0\u304C\u7D42\u308F\u3063\u305F\u5F8C\u306E\u753B\u9762/PointCountingScene.unity"
+    guid: b9e93f349c0e1e748a594c897d5d71ca
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
