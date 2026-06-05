@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public class PointGameManagment : MonoBehaviour
+public class TofinalScene : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,13 +13,9 @@ public class PointGameManagment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Keyboard.current.qKey.wasPressedThisFrame)
+        if(Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            SceneManager.LoadScene("AVictoryScene");
-        }
-        if(Keyboard.current.eKey.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene("BVictoryScene");
+            SceneManager.LoadScene("FinalScene");
         }
     }
 }
