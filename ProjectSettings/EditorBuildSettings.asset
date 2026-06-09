@@ -65,6 +65,9 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/SceneManagement/\u30B2\u30FC\u30E0\u304C\u7D42\u308F\u3063\u305F\u5F8C\u306E\u753B\u9762/BVictoryScene.unity"
     guid: 53435ab03e8cab344ba77627621b1d33
+  - enabled: 1
+    path: "Assets/SceneManagement/\u30B2\u30FC\u30E0\u304C\u7D42\u308F\u3063\u305F\u5F8C\u306E\u753B\u9762/FinalScene.unity"
+    guid: 7eb003a481b996a4c878c1bef73efe12
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
