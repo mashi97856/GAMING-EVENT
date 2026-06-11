@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameStartMangment : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log("Game Start!丸ボタンを押してね！");
+        GetComponent<AudioSource>().Play();
     }
 
     // Update is called once per frame
