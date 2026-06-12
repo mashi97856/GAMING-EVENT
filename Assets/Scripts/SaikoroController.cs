@@ -35,7 +35,7 @@ public class SaikoroController : MonoBehaviour
     void Update()
     {
         // スペースで止めるだけ
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && canRoll && isRolling)
+        if ((Gamepad.current.circleButton.wasPressedThisFrame || Keyboard.current.enterKey.wasPressedThisFrame) && canRoll && isRolling)
         {
             GetComponent<AudioSource>().Play();
             StopDice();

@@ -8,7 +8,7 @@ public class RuleExpanation5 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        if(Gamepad.current.circleButton.wasPressedThisFrame || Keyboard.current.enterKey.wasPressedThisFrame)
         {
             SceneManager.LoadScene("すごろくルールの説明画面６");
         }

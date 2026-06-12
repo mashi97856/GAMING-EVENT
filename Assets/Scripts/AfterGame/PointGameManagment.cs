@@ -13,11 +13,11 @@ public class PointGameManagment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Keyboard.current.qKey.wasPressedThisFrame)
+        if(Gamepad.current.triangleButton.wasPressedThisFrame || Keyboard.current.qKey.wasPressedThisFrame)
         {
             SceneManager.LoadScene("AVictoryScene");
         }
-        if(Keyboard.current.eKey.wasPressedThisFrame)
+        if(Gamepad.current.crossButton.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame)
         {
             SceneManager.LoadScene("BVictoryScene");
         }

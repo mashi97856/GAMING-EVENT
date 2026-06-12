@@ -26,17 +26,17 @@ public class BombManagment : MonoBehaviour
     void Update()
     {
         if (spriteRenderer == null) return;
-        if (Keyboard.current == null) return;
+        if (Gamepad.current == null) return;
 
-        if (Keyboard.current.qKey.wasPressedThisFrame)
+        if (Gamepad.current.triangleButton.wasPressedThisFrame || Keyboard.current.qKey.wasPressedThisFrame)
         {
             HandleBombSelection(0, "三角");
         }
-        if (Keyboard.current.wKey.wasPressedThisFrame)
+        if (Gamepad.current.squareButton.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame)
         {
             HandleBombSelection(1, "四角");
         }
-        if (Keyboard.current.eKey.wasPressedThisFrame)
+        if (Gamepad.current.crossButton.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame)
         {
             HandleBombSelection(2, "×");
         }

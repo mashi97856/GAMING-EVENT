@@ -9,7 +9,7 @@ public class RuleExpanation6 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        if(Gamepad.current.circleButton.wasPressedThisFrame || Keyboard.current.enterKey.wasPressedThisFrame)
         {
             SceneManager.LoadScene("BBPEvent");
         }

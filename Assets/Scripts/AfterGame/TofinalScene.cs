@@ -1,19 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class TofinalScene : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Application.targetFrameRate = 60;
+        GetComponent<AudioSource>().Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        if(Gamepad.current.circleButton.wasPressedThisFrame || Keyboard.current.enterKey.wasPressedThisFrame)
         {
             SceneManager.LoadScene("FinalScene");
         }
