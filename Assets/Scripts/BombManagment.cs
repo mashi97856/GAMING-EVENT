@@ -12,8 +12,6 @@ public class BombManagment : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Application.targetFrameRate = 60;
-        Debug.Log("爆弾開始!三つのうちどれか一つがランダムで爆弾だよ!爆弾じゃないのを選んでボタンを押してね！");
         bombIndex = Random.Range(0, bombSprites.Length); // 爆弾のインデックスをランダムに決定
         spriteRenderer = GetComponent<SpriteRenderer>(); // スプライトレンダラーを取得
         if (spriteRenderer == null)
@@ -46,7 +44,6 @@ public class BombManagment : MonoBehaviour
     {
         if (bombIndex == selectedIndex)
         {
-            Debug.Log($"{shapeName}の爆弾だ！２マス下がります！");
             // 爆発フラグを立てる
             GameData.bombExploded = true;
             GameData.bombExplodedPlayer = GameData.currentPlayer; // 爆発したプレイヤーを記録
@@ -55,7 +52,6 @@ public class BombManagment : MonoBehaviour
         }
         else
         {
-            Debug.Log($"{shapeName}の爆弾はセーフ！");
             GameData.bombGameFinished = true;
             SceneManager.LoadScene("爆弾解除成功画面");
         }

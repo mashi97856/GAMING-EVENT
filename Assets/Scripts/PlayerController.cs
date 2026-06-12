@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     // 爆弾が爆発した場合、2マス戻す（アニメーション付き）
     if (GameData.bombExploded && GameData.bombExplodedPlayer == (gameObject.name == "TeamA" ? 0 : 1))
     {
-        Debug.Log($"{gameObject.name}: 爆発したので2マス戻ります。現在:{currentIndex} → ");
         StartCoroutine(MoveBack(2));
         GameData.bombExploded = false;
         GameData.bombExplodedPlayer = -1;

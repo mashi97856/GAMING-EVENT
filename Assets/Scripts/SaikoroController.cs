@@ -18,7 +18,6 @@ public class SaikoroController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("サイコロ開始");
         Application.targetFrameRate = 60;
         spriteRenderer = GetComponent<SpriteRenderer>();// サイコロのスプライトを変更するためのコンポーネントを取得
         currentPlayer = GameData.currentPlayer;
