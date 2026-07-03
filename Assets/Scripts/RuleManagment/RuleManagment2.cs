@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class RuleManagment2 : MonoBehaviour
 {
-    // Update is called once per frame
     void Update()
     {
         if (Gamepad.current.circleButton.wasPressedThisFrame || Keyboard.current.enterKey.wasPressedThisFrame)

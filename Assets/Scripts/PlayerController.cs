@@ -68,8 +68,6 @@ IEnumerator MoveBack(int steps)
             if (currentIndex >= masu.Length - 1)
             {
                 currentIndex = masu.Length - 1;
-
-                Debug.Log(gameObject.name + " ゴール！");
                 SavePosition();
                 SceneManager.LoadScene("EndScene");
                 yield break;
@@ -110,7 +108,6 @@ IEnumerator MoveBack(int steps)
             // 20マス目に止まったら2マス戻る（アニメーション付き）
             yield return StartCoroutine(MoveBack(2));
         }
-        
         isMoving = false;
         SavePosition();
     }
